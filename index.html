@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mode'LUI 3D</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #0d0d0d;
+            color: #f2f2f2;
+        }
+
+        header {
+            background: linear-gradient(90deg, #ff5f6d, #ffc371);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+        }
+
+        header p {
+            font-size: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        nav {
+            display: none;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        nav a {
+            display: block;
+            padding: 1rem;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        nav a:hover {
+            background-color: #ffc371;
+        }
+
+        .burger {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .catalogue {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .category {
+            margin-bottom: 2rem;
+        }
+
+        .subcategory {
+            margin-left: 20px;
+        }
+
+        .catalogue .item {
+            display: inline-block;
+            width: calc(33% - 1rem);
+            margin: 0.5rem;
+            text-align: center;
+            background: #1e1e1e;
+            padding: 1rem;
+            border-radius: 12px;
+            opacity: 0; /* Par défaut, les éléments sont invisibles */
+            transform: translateY(30px); /* Ils sont déplacés vers le bas */
+            transition: opacity 0.5s, transform 0.5s; /* Transition fluide */
+        }
+
+        .catalogue img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .catalogue .item h3 {
+            color: #ff5f6d;
+            font-size: 1.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .catalogue .item p {
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        .tarifs, .contact {
+            margin-top: 4rem;
+        }
+
+        .contact a {
+            color: #ffc371;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 5rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mode'LUI 3D</h1>
+        <p>"Marché conclu"</p>
+    </header>
+
+    <div class="burger" onclick="toggleMenu()">
+        &#9776;
+    </div>
+
+    <nav id="menu">
+        <a href="javascript:void(0);" onclick="scrollToSection('catalogue')">Catalogue</a>
+    </nav>
+
+    <section id="catalogue" class="catalogue">
+        <h2>Catalogue de Modèles</h2>
+        <div id="categories-container"></div> <!-- Le conteneur des catégories -->
+    </section>
+
+    <section class="tarifs">
+        <h2>Tarifs</h2>
+        <ul>
+            <li>Modèles existants : entre 50 et 500 Robux</li>
+            <li>Modèles personnalisés : jusqu'à 1000 Robux selon la demande</li>
+            <li>Réalisation sous 48h</li>
+        </ul>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Contact</h2>
+        <p>Pour toute demande ou commande, contactez-moi directement sur Discord : <a href="https://discord.com/users/ton-id">n0name.exe_</a></p>
+    </section>
+
+    <footer>
+        &copy; 2025 Mode'LUI 3D. Tous droits réservés.
+    </footer>
+
+    <script>
+        // Fonction pour afficher ou cacher le menu burger
+        function toggleMenu() {
+            var menu = document.getElementById('menu');
+            if (menu.style.display === 'block') {
+                menu.style.display = 'none'; // Cache le menu
+            } else {
+                menu.style.display = 'block'; // Affiche le menu
+            }
+        }
+
+        // Fonction pour animer les éléments du catalogue
+        function animateCatalogue() {
+            const items = document.querySelectorAll('.catalogue .item');
+            items.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.opacity = 1;
+                    item.style.transform = 'translateY(0)';
+                }, index * 200); // Un délai entre chaque élément
+            });
+        }
+
+        // Fonction pour naviguer à travers les sections (défilement fluide)
+        function scrollToSection(id) {
+            const section = document.getElementById(id);
+            window.scrollTo({
+                top: section.offsetTop,
+                behavior: 'smooth'
+            });
+        }
+
+        // Catégories avec leurs sous-catégories et produits
+        const categories = [
+            {
+                name: 'Armes',
+                subcategories: [
+                    {
+                        name: 'Mêlée',
+                        items: [
+                            { img: 'file:///C:/Users/enzof/Documents/PRO/BLENDER/MODEL/roblox/armes/épée%20long/fanstatic/fantastic_sword.png', name: 'Épée', price: '500 Robux' },
+                            { img: 'https://via.placeholder.com/300x300?text=Weapon+Melee+2', name: 'Hache', price: '300 Robux' }
+                        ]
+                    },
+                    {
+                        name: 'À distance',
+                        items: [
+                            { img: 'https://via.placeholder.com/300x300?text=Weapon+Range+1', name: 'Arc', price: '450 Robux' },
+                            { img: 'https://via.placeholder.com/300x300?text=Weapon+Range+2', name: 'Fusil', price: '600 Robux' }
+                        ]
+                    }
+                ]
+            },
+            {
+                name: 'Props',
+                subcategories: [
+                    {
+                        name: 'Décorations',
+                        items: [
+                            { img: 'https://via.placeholder.com/300x300?text=Prop+Decoration+1', name: 'Table', price: '200 Robux' },
+                            { img: 'https://via.placeholder.com/300x300?text=Prop+Decoration+2', name: 'Chaise', price: '150 Robux' }
+                        ]
+                    },
+                    {
+                        name: 'Objets utilitaires',
+                        items: [
+                            { img: 'https://via.placeholder.com/300x300?text=Prop+Utility+1', name: 'Lampe', price: '180 Robux' },
+                            { img: 'https://via.placeholder.com/300x300?text=Prop+Utility+2', name: 'Caisse', price: '120 Robux' }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        // Générer le menu des catégories et le catalogue
+        function generateCatalogue() {
+            const menu = document.getElementById('menu');
+            const categoriesContainer = document.getElementById('categories-container');
+            menu.innerHTML = '<a href="javascript:void(0);" onclick="scrollToSection(\'catalogue\')">Catalogue</a>'; // Réinitialiser le menu
+
+            categories.forEach((category, index) => {
+                // Ajout du lien de la catégorie dans le menu
+                menu.innerHTML += `<a href="javascript:void(0);" onclick="scrollToSection('category-${index}')">${category.name}</a>`;
+
+                // Création de la section de la catégorie
+                const categorySection = document.createElement('div');
+                categorySection.id = `category-${index}`;
+                categorySection.classList.add('category');
+                categorySection.innerHTML = `<h3>${category.name}</h3>`;
+
+                // Pour chaque sous-catégorie
+                category.subcategories.forEach((subcategory, subindex) => {
+                    const subcategorySection = document.createElement('div');
+                    subcategorySection.classList.add('subcategory');
+                    subcategorySection.innerHTML = `<h4>${subcategory.name}</h4>`;
+
+                    subcategory.items.forEach(item => {
+                        const itemElement = document.createElement('div');
+                        itemElement.classList.add('item');
+                        itemElement.innerHTML = `
+                            <img src="${item.img}" alt="${item.name}">
+                            <h3>${item.name}</h3>
+                            <p>Prix : ${item.price}</p>
+                        `;
+                        subcategorySection.appendChild(itemElement);
+                    });
+
+                    categorySection.appendChild(subcategorySection);
+                });
+
+                categoriesContainer.appendChild(categorySection);
+            });
+
+            // Animer les éléments du catalogue après avoir généré les catégories
+            animateCatalogue();
+        }
+
+        // Initialiser le catalogue
+        window.onload = function() {
+            generateCatalogue();
+        }
+    </script>
+</body>
+</html>
